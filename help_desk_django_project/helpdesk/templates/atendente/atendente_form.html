@@ -6,52 +6,59 @@ Cadastro de Atendente
 {% endblock title %}
 
 {% block content %}
+<div class="row mb-3">
+    <div class="col-12">
+       <h1>Cadastro de Cliente</h1>
+     </div>
+</div>
+<div class="row">
+    <div class="col-12">
 
-<form method="post" action="">
-    {% csrf_token %}
-    <div class="input-group mb-3">
-        <div class="input-group-append">
-             <span class="input-group-text"><i class="fas fa-user"></i></span>
+    <form method="post" action="">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <div class="input-group-append">
+                 <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            {{form.username}}
         </div>
-        {{form.username}}
-    </div>
-    <div class="input-group mb-3">
-        <div class="input-group-append">
-             <span class="input-group-text"><i class="fas fa-user"></i></span>
+        <div class="input-group mb-3">
+            <div class="input-group-append">
+                 <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            {{form.username}}
         </div>
-        {{form.username}}
-    </div>
-    <!--
-    <div class="input-group mb-3">
-        <div class="input-group-append">
-             <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+        <!--
+        <div class="input-group mb-3">
+            <div class="input-group-append">
+                 <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+            </div>
+            {{form.email}}
         </div>
-        {{form.email}}
-    </div>
-    -->
-    <div class="input-group mb-3">
-        <div class="input-group-append">
-             <span class="input-group-text"><i class="fas fa-key"></i></span>
+        -->
+        <div class="input-group mb-3">
+            <div class="input-group-append">
+                 <span class="input-group-text"><i class="fas fa-key"></i></span>
+            </div>
+            {{form.password1}}
         </div>
-        {{form.password1}}
-    </div>
 
-    <div class="input-group mb-3">
-        <div class="input-group-append">
-             <span class="input-group-text"><i class="fas fa-key"></i></span>
+        <div class="input-group mb-3">
+            <div class="input-group-append">
+                 <span class="input-group-text"><i class="fas fa-key"></i></span>
+            </div>
+            {{form.password2}}
         </div>
-        {{form.password2}}
-    </div>
-    <button type="submit" class="btn btn-primary">
-        Salvar
-    </button>
-</form>
+        <button type="submit" class="btn btn-primary">
+            Salvar
+        </button>
+    </form>
 
 {{form.errors}}
 
 <div class="mt-4">
     <div class="d-flex justify-content-center links">
-        Já tem uma conta? <a href="{% url 'cliente_login' %}" class="ml-2">Login</a>
+        Já tem uma conta? <a href="{% url 'atendente_login' %}" class="ml-2">Login</a>
     </div>
 </div>
 

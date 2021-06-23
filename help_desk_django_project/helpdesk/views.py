@@ -1,8 +1,9 @@
 from django.forms import ModelForm
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 from .models import *
 from django import forms
 
@@ -24,7 +25,6 @@ class ChamadoInteracaoForm(ModelForm):
             'data_abertura': forms.DateInput(attrs={'class': 'form-control', 'type': 'date', 'required': 'required'}),
             'data_fechamento': forms.DateInput(attrs={'class': 'form-control', 'type': 'date', 'required': 'required'})
         }
-
 
 def home(request, template_name='home/home.html'):
     return render(request, template_name)
@@ -51,15 +51,18 @@ def user_logout(request):
         logout(request)
         return redirect('home')
 
+@login_required(login_url='cliente_login')
 def cliente_home(request, template_name='cliente/cliente_home.html'):
     chamado = Chamado.objects.all()
     chamados = {'chamado': chamado}
     return render(request, template_name, chamados)
 
+@login_required(login_url='cliente_login')
 def cliente_list(request, template_name='cliente/cliente_list.html'):
     cliente = Cliente.objects.all()
     clientes = {'cliente': cliente}
     return render(request, template_name, clientes)
+
 
 def cliente_create(request, template_name='cliente/cliente_form.html'):
     if request.user.is_authenticated:
@@ -76,6 +79,7 @@ def cliente_create(request, template_name='cliente/cliente_form.html'):
     context = {'form': form}
     return render(request, template_name, context)
 
+@login_required(login_url='atendente_login')
 def cliente_delete(request, pk):
     cliente = Cliente.objects.get(pk=pk)
     if request.method == "POST":
@@ -83,6 +87,7 @@ def cliente_delete(request, pk):
         return redirect('cliente_list')
     return render(request, 'cliente/cliente_delete.html', {'cliente': cliente})
 
+@login_required(login_url='atendente_login')
 def atendente_home(request, template_name='atendente/atendente_home.html'):
     chamado = Chamado.objects.all()
     chamados = {'chamado': chamado}
@@ -106,6 +111,7 @@ def atendente_login(request):
         context = {}
         return render(request, 'cliente/cliente_login.html', context)
 
+@login_required(login_url='atendente_login')
 def atendente_list(request, template_name='atendente/atendente_list.html'):
     atendente = Atendente.objects.all()
     atendentes = {'cliente': atendente}
@@ -137,6 +143,7 @@ def atendente_create(request, template_name='atendente/atendente_form.html'):
 #        form = AtendenteForm(instance=atendente)
 #    return render(request, template_name, {'form': form})
 
+@login_required(login_url='atendente_login')
 def atendente_delete(request, pk):
     atendente = Atendente.objects.get(pk=pk)
     if request.method == "POST":
@@ -144,6 +151,7 @@ def atendente_delete(request, pk):
         return redirect('atendente_list')
     return render(request, 'atendente_delete', {'atendente': atendente})
 
+@login_required(login_url='cliente_login')
 def chamado_create(request, template_name='chamado/chamado_form.html'):
     form = ChamadoForm(request.POST or None)
     if form.is_valid():

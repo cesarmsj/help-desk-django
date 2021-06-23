@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f0ad06ff-9190-46f6-8bb5-5934aeaf9612" name="Default Changelist" comment="Login OK&#10;Problema com Logout para resolver">
+    <list default="true" id="f0ad06ff-9190-46f6-8bb5-5934aeaf9612" name="Default Changelist" comment="Problema do logout resolvido&#10;Resolver problema dos títulos das páginas agora">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/atendente/atendente_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/atendente/atendente_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/atendente/atendente_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/atendente/atendente_home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/atendente/atendente_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/atendente/atendente_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/atendente/atendente_login.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/atendente/atendente_login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_login.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -130,7 +134,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624466122829</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Problema do logout resolvido&#10;Resolver problema dos títulos das páginas agora">
+      <created>1624467100828</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1624467100828</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -148,7 +159,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Primeiro commit" />
     <MESSAGE value="Login OK&#10;Problema com Logout para resolver" />
-    <option name="LAST_COMMIT_MESSAGE" value="Login OK&#10;Problema com Logout para resolver" />
+    <MESSAGE value="Problema do logout resolvido&#10;Resolver problema dos títulos das páginas agora" />
+    <option name="LAST_COMMIT_MESSAGE" value="Problema do logout resolvido&#10;Resolver problema dos títulos das páginas agora" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

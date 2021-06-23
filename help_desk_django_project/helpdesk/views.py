@@ -47,7 +47,7 @@ def cliente_login(request):
         context = {}
         return render(request, 'cliente/cliente_login.html', context)
 
-def logout(request):
+def user_logout(request):
         logout(request)
         return redirect('home')
 

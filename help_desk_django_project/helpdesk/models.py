@@ -1,41 +1,11 @@
+from django.contrib.auth.models import User
 from django.db import models
 
-
 class Cliente(models.Model):
-
-    username = models.CharField(max_length=20, default='')
-    password = models.CharField(max_length=20, default='123456')
-    nome = models.CharField(max_length=50)
-    nascimento = models.DateField(null=True)
-    email = models.EmailField()
-    SEXOS = (
-        ('M', 'Masculino'),
-        ('F', 'Feminino')
-    )
-
-    sexo = models.CharField(max_length=1, choices=SEXOS)
-    cidade = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.nome
+    user = models.OneToOneField(User, related_name='cliente', on_delete=models.CASCADE)
 
 class Atendente(models.Model):
-
-    username = models.CharField(max_length=20, default='')
-    password = models.CharField(max_length=20, default='123456')
-    nome = models.CharField(max_length=50)
-    nascimento = models.DateField()
-    email = models.EmailField()
-    SEXOS = (
-        ('M', 'Masculino'),
-        ('F', 'Feminino')
-    )
-
-    sexo = models.CharField(max_length=1, choices=SEXOS)
-    cidade = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.nome
+    user = models.OneToOneField(User, related_name='atendente', on_delete=models.CASCADE)
 
 class Chamado(models.Model):
 
@@ -47,10 +17,11 @@ class Chamado(models.Model):
 
     descricao = models.CharField(max_length=200)
     status = models.CharField(max_length=1, choices=STATUS)
+    fk_cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, default='')
+    fk_atendente = models.ForeignKey(Atendente, on_delete=models.CASCADE, default='')
     data_abertura = models.DateField()
     data_fechamento = models.DateField(null=True)
-    fk_cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    fk_atendente = models.ForeignKey(Atendente, on_delete=models.CASCADE)
+
 
     def __str__(self):
         return self.descricao

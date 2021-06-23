@@ -1,11 +1,38 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 class Cliente(models.Model):
-    user = models.OneToOneField(User, related_name='cliente', on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        default=''
+    )
+
+    class Meta:
+        managed: False
+        db_table = 'helpdesk_cliente'
+
+@receiver(post_save, sender=User)
+def update_profile_signal(sender, instance, created, **kwargs):
+    if created:
+        Cliente.objects.create(user=instance)
+    instance.cliente.save()
 
 class Atendente(models.Model):
-    user = models.OneToOneField(User, related_name='atendente', on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        default=''
+    )
+
+    class Meta:
+        managed: False
+        db_table = 'helpdesk_atendente'
 
 class Chamado(models.Model):
 
@@ -32,4 +59,7 @@ class Chamado_Interacao(models.Model):
     data_abertura = models.DateTimeField(blank=True)
     data_fechamento = models.DateTimeField(null=True, blank=True)
     teste = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.descricao
 

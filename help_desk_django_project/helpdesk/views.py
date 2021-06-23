@@ -1,5 +1,7 @@
+import datetime
+
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
+from django.forms import inlineformset_factory
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -27,7 +29,7 @@ def cliente_login(request):
                 login(request, user)
                 return redirect('cliente_home')
             else:
-                messages.info(request, 'Usuário ou senha incorreto')
+                messages.error(request, 'Usuário ou senha incorreto')
         context = {}
         return render(request, 'cliente/cliente_login.html', context)
 
@@ -54,9 +56,11 @@ def cliente_create(request, template_name='cliente/cliente_form.html'):
     else:
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'Conta criada para o usuário ' + user)
+            user = form.save()
+            user.refresh_from_db()
+            user.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, 'Conta criada para o usuário ' + username)
 
             return redirect('cliente_login')
 
@@ -91,7 +95,7 @@ def atendente_login(request):
                 login(request, user)
                 return redirect('atendente_home')
             else:
-                messages.info(request, 'Usuário ou senha incorreto')
+                messages.error(request, 'Usuário ou senha incorreto')
         context = {}
         return render(request, 'cliente/cliente_login.html', context)
 
@@ -136,12 +140,18 @@ def atendente_delete(request, pk):
     return render(request, 'atendente_delete', {'atendente': atendente})
 
 @login_required(login_url='cliente_login')
-def chamado_create(request, template_name='chamado/chamado_form.html'):
-    form = CreateChamadoForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect('chamado_list')
-    return render(request, template_name, {'form': form})
+def chamado_create(request, pk):
+    ChamadoFormSet = inlineformset_factory(Cliente, Chamado, fields=('data_abertura', 'data_fechamento'))
+    cliente_logged = Cliente.objects.get(id=pk)
+    cliente = cliente_logged.id
+    if request.method == 'POST':
+        form = ChamadoForm(request.POST or None)
+        formset = ChamadoFormSet(request.POST, instance=cliente)
+        if formset.is_valid():
+            form.save()
+            return redirect('chamado_list')
+    context = {'form':formset}
+    return render(request, 'chamado/chamado_create.html', context)
 
 def chamado_interacao_create(request, chamado, template_name='chamado/chamadoInteracao_form.html'):
     chamado = Chamado.objects.get(pk=chamado)

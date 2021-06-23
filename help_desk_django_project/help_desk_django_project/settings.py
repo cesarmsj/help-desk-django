@@ -135,3 +135,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #LOGIN_REDIRECT_URL = reverse_lazy('helpdesk:cliente_home')
 #LOGIN_URL = reverse_lazy('helpdesk:cliente_login')
 #LOGOUT_REDIRECT_URL = reverse_lazy('helpdesk:cliente_logout')
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'

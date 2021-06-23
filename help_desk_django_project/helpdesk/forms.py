@@ -14,10 +14,10 @@ class CreateUserForm(UserCreationForm):
             'email': forms.EmailInput(attrs={'type': 'email', 'required': 'required'}),
         }
 
-class CreateChamadoForm(ModelForm):
+class ChamadoForm(ModelForm):
     class Meta:
         model = Chamado
-        fields = ['descricao']
+        fields = '__all__'
         widgets = {
             'descricao': forms.Textarea(attrs={'class': 'form-control', 'type': 'date', 'required': 'required'}),
         }

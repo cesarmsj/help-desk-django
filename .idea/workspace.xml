@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f0ad06ff-9190-46f6-8bb5-5934aeaf9612" name="Default Changelist" comment="Criado forms.py">
+    <list default="true" id="f0ad06ff-9190-46f6-8bb5-5934aeaf9612" name="Default Changelist" comment="Criar a página de criação do chamado.&#10;&#10;Falta agora ajustar o cadastro do chamado,&#10;onde:&#10;&#10;data_abertura = data e hora atual;&#10;fk_cliente = cliente logado;">
       <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/help_desk_django_project/help_desk_django_project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/help_desk_django_project/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/migrations/0002_auto_20210622_1914.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/migrations/0003_chamado_chamado_interacao.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/migrations/0004_auto_20210623_1154.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/migrations/0005_auto_20210623_1156.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/migrations/0006_auto_20210623_1158.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/migrations/0007_auto_20210623_1320.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/migrations/__init__.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado/chamado_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado/chamado_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/atendente/atendente_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/atendente/atendente_home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/atendente/atendente_login.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/atendente/atendente_login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_login.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/views.py" afterDir="false" />
     </list>
@@ -163,7 +162,21 @@
       <option name="project" value="LOCAL" />
       <updated>1624473536239</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Criar a página de criação do chamado.&#10;&#10;Falta agora ajustar o cadastro do chamado,&#10;onde:&#10;&#10;data_abertura = data e hora atual;&#10;fk_cliente = cliente logado;">
+      <created>1624479899958</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1624479899958</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Criar a página de criação do chamado.&#10;&#10;Falta agora ajustar o cadastro do chamado,&#10;onde:&#10;&#10;data_abertura = data e hora atual;&#10;fk_cliente = cliente logado;">
+      <created>1624479920785</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1624479920785</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -184,17 +197,7 @@
     <MESSAGE value="Problema do logout resolvido&#10;Resolver problema dos títulos das páginas agora" />
     <MESSAGE value="Correções em rotas e em títulos" />
     <MESSAGE value="Criado forms.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="Criado forms.py" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/help_desk_django_project/helpdesk/urls.py</url>
-          <line>16</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Criar a página de criação do chamado.&#10;&#10;Falta agora ajustar o cadastro do chamado,&#10;onde:&#10;&#10;data_abertura = data e hora atual;&#10;fk_cliente = cliente logado;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Criar a página de criação do chamado.&#10;&#10;Falta agora ajustar o cadastro do chamado,&#10;onde:&#10;&#10;data_abertura = data e hora atual;&#10;fk_cliente = cliente logado;" />
   </component>
 </project>

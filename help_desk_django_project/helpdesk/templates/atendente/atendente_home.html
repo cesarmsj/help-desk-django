@@ -40,7 +40,7 @@ HOME - Meus chamados
             {% endfor %}
             </tbody>
         </table>
-        <a href="{% url 'chamado_create' %}">
+        <a href="{% url 'chamado_create' pk=user.id %}">
             <button type="submit" class="btn btn-primary">
                 Cadastrar novo chamado
             </button>

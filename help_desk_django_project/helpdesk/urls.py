@@ -17,4 +17,5 @@ urlpatterns = [
 #    url(r'^cliente_update/(?P<pk>[0-9]+)', cliente_update, name='cliente_update'),
     url(r'^cliente_delete/(?P<pk>[0-9]+)', cliente_delete, name='cliente_delete'),
     url(r'^chamado_create/', chamado_create, name='chamado_create'),
+    url(r'^chamado_list/(?P<pk>[0-9]+)', chamado_create, name='chamado_create'),
 ]

@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from .models import *
-from .forms import CreateUserForm
+from .forms import *
 
 # Create your views here.
 
@@ -137,9 +137,22 @@ def atendente_delete(request, pk):
 
 @login_required(login_url='cliente_login')
 def chamado_create(request, template_name='chamado/chamado_form.html'):
-    form = ChamadoForm(request.POST or None)
+    form = CreateChamadoForm(request.POST or None)
     if form.is_valid():
         form.save()
         return redirect('chamado_list')
     return render(request, template_name, {'form': form})
+
+def chamado_interacao_create(request, chamado, template_name='chamado/chamadoInteracao_form.html'):
+    chamado = Chamado.objects.get(pk=chamado)
+    form = CreateChamadoInteracaoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('chamado_interacao_list', pk=chamado.id)
+    return render(request, template_name, {'form': form})
+
+def chamado_interacao_list(request, chamado, template_name='atendente/atendente_list.html'):
+    chamado_interacao = Atendente.objects.filter(chamado=chamado)
+    chamado_interacoes = {'chamado_interacao': chamado_interacao}
+    return render(request, template_name, chamado_interacoes)
 

@@ -17,17 +17,15 @@ class CreateUserForm(UserCreationForm):
 class CreateChamadoForm(ModelForm):
     class Meta:
         model = Chamado
-        fields = ['status','data_abertura', 'data_fechamento', 'fk_atendente', 'descricao', 'fk_cliente']
+        fields = ['descricao']
         widgets = {
-            'data_abertura': forms.DateInput(attrs={'class': 'form-control', 'type': 'date', 'required': 'required'}),
-            'data_fechamento': forms.DateInput(attrs={'class': 'form-control', 'type': 'date', 'required': 'required'})
+            'descricao': forms.Textarea(attrs={'class': 'form-control', 'type': 'date', 'required': 'required'}),
         }
 
-class ChamadoInteracaoForm(ModelForm):
+class CreateChamadoInteracaoForm(ModelForm):
     class Meta:
         model = Chamado_Interacao
-        fields = ['fk_chamado','descricao']
+        fields = ['descricao']
         widgets = {
-            'data_abertura': forms.DateInput(attrs={'class': 'form-control', 'type': 'date', 'required': 'required'}),
-            'data_fechamento': forms.DateInput(attrs={'class': 'form-control', 'type': 'date', 'required': 'required'})
+            'descricao': forms.Textarea(attrs={'class': 'form-control', 'type': 'date', 'required': 'required'}),
         }

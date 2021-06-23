@@ -1,17 +1,33 @@
 {% extends '../base.html' %}
-{% load bootstrap3 %}
-{% block title %}
-Cadastro de clientes
-{% endblock title %}
 
 {% block content %}
+<div class="row mb-3">
+    <div class="col-12">
+       <h1>Novo Chamado</h1>
+     </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <!--
+        {% if form.errors %}
+        <p>{{ form.errors }}</p>
+        {% endif %}
+        -->
+        <form method="post" action="">
+            {% csrf_token %}
 
-<form method="post">
-    {% csrf_token %}
-    {% bootstrap_form form  %}
-    <button type="submit" class="btn btn-primary">
-        Salvar
-    </button>
-</form>
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                     <span class="input-group-text"><i class="fas fa-user"></i></span>
+                </div>
+                {{ form.descricao }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Salvar
+            </button>
+        </form>
+    </div>
+</div>
 
 {% endblock content %}

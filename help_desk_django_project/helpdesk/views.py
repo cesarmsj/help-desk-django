@@ -1,30 +1,14 @@
-from django.forms import ModelForm
 from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+
 from .models import *
-from django import forms
+from .forms import CreateUserForm
 
 # Create your views here.
-
-class ChamadoForm(ModelForm):
-    class Meta:
-        model = Chamado
-        fields = ['status','data_abertura', 'data_fechamento', 'fk_atendente', 'descricao', 'fk_cliente']
-        widgets = {
-            'data_abertura': forms.DateInput(attrs={'class': 'form-control', 'type': 'date', 'required': 'required'}),
-            'data_fechamento': forms.DateInput(attrs={'class': 'form-control', 'type': 'date', 'required': 'required'})
-        }
-class ChamadoInteracaoForm(ModelForm):
-    class Meta:
-        model = Chamado_Interacao
-        fields = ['fk_chamado','descricao']
-        widgets = {
-            'data_abertura': forms.DateInput(attrs={'class': 'form-control', 'type': 'date', 'required': 'required'}),
-            'data_fechamento': forms.DateInput(attrs={'class': 'form-control', 'type': 'date', 'required': 'required'})
-        }
 
 def home(request, template_name='home/home.html'):
     return render(request, template_name)
@@ -68,11 +52,11 @@ def cliente_create(request, template_name='cliente/cliente_form.html'):
     if request.user.is_authenticated:
         return redirect('cliente_home')
     else:
-        form = UserCreationForm(request.POST)
+        form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
             user = form.cleaned_data.get('username')
-            messages.sucess(request, 'Conta criada para o usuário ' + user)
+            messages.success(request, 'Conta criada para o usuário ' + user)
 
             return redirect('cliente_login')
 
@@ -121,11 +105,11 @@ def atendente_create(request, template_name='atendente/atendente_form.html'):
     if request.user.is_authenticated:
         return redirect('atendente_home')
     else:
-        form = UserCreationForm(request.POST)
+        form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
             user = form.cleaned_data.get('username')
-            messages.sucess(request, 'Conta criada para o usuário ' + user)
+            messages.success(request, 'Conta criada para o usuário ' + user)
 
             return redirect('atendente_login')
 

@@ -1,0 +1,12 @@
+#home_art{
+    height: 40vw;
+    width: 40vw;
+    background-image: url("../img/help-desk.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#home_text{
+    font-size: 20px;
+}

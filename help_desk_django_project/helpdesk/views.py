@@ -144,19 +144,21 @@ def chamado_create(request, pk):
             form.save()
 
             messages.success(request, 'Chamado aberto!')
-            return redirect('chamado_list', pk=pk)
+            return redirect('chamado_list')
         else:
             messages.error(request, 'Houve um problema ao tentar abrir o chamado.')
-            return redirect('chamado_list', pk=pk)
+            return redirect('chamado_list')
     context = {'form': form}
     return render(request, 'chamado/chamado_form.html', context)
 
-def chamado_list(request, pk):
-    chamado = Atendente.objects.filter(pk=pk)
-    chamados = {'chamado': chamado}
-    return render(request, 'chamado/chamado_list.html', chamados)
+@login_required(login_url='cliente_login')
+def chamado_list(request):
+    cli = Cliente.objects.get(user_id=request.user.id)
+    chamado = Chamado.objects.filter(fk_cliente=cli.id)
+    context = {'chamado': chamado}
+    return render(request, 'chamado/chamado_list.html', context)
 
-def chamado_interacao_create(request, chamado, template_name='chamado/chamadoInteracao_form.html'):
+def chamado_interacao_create(request, chamado, template_name='chamado/chamado_interacao_form.html'):
     chamado = Chamado.objects.get(pk=chamado)
     form = CreateChamadoInteracaoForm(request.POST or None)
     if form.is_valid():
@@ -164,8 +166,8 @@ def chamado_interacao_create(request, chamado, template_name='chamado/chamadoInt
         return redirect('chamado_interacao_list', pk=chamado.id)
     return render(request, template_name, {'form': form})
 
-def chamado_interacao_list(request, chamado, template_name='atendente/atendente_list.html'):
+def chamado_interacao_list(request, chamado):
     chamado_interacao = Atendente.objects.filter(chamado=chamado)
-    chamado_interacoes = {'chamado_interacao': chamado_interacao}
-    return render(request, template_name, chamado_interacoes)
+    chamado_interacoes = {'chamado_interacao_list': chamado_interacao}
+    return render(request, 'chamado_interacao/chamado_interacao_list.html', chamado_interacoes)
 

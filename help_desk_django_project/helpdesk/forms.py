@@ -19,7 +19,7 @@ class ChamadoForm(ModelForm):
         model = Chamado
         fields = ['descricao']
         widgets = {
-            'descricao': forms.Textarea(attrs={'class': 'form-control', 'type': 'date', 'required': 'required'}),
+            'descricao': forms.Textarea(attrs={'class': 'form-control', 'type': 'date', 'required': 'required', 'placeholder':'Em que podemos lhe ajudar? Escreva aqui.'}),
         }
 
 

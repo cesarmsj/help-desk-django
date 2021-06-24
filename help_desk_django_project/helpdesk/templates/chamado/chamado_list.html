@@ -25,9 +25,10 @@ Lista de clientes
             <td>{{ c.data_abertura }}</td>
             <td>{{ c.descricao }}</td>
             <td>{{ c.status }}</td>
+            <td>{{ c.atendente }}</td>
             <td>{{ c.data_fechamento }}</td>
             <td>
-                <a href="{% url 'chamado_interacao_lista' pk=c.id %}">
+                <a href="{% url 'chamado_interacao_list' chamado=c.id %}">
                     <i class="fas fa-info"></i>
                 </a>
             </td>

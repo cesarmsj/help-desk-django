@@ -9,38 +9,48 @@ Lista de clientes
 <table class="table">
     <thead>
         <tr>
-            <th>Nome</th>
-            <th>Data de nascimento</th>
-            <th>Email</th>
-            <th>Sexo</th>
-            <th>Cidade</th>
-            <th>Ação</th>
+            <th>Nº do chamado</th>
+            <th>Data da abertura</th>
+            <th>Descrição</th>
+            <th>Status atual</th>
+            <th>Atendente</th>
+            <th>Data de fechamento</th>
+            <th>Detalhes</th>
         </tr>
     </thead>
     <tbody>
-    {% for cli in cliente %}
+    {% for c in chamado %}
         <tr>
-            <td>{{ cli.nome }}</td>
-            <td>{{ cli.nascimento }}</td>
-            <td>{{ cli.email }}</td>
-            <td>{{ cli.sexo }}</td>
-            <td>{{ cli.cidade }}</td>
+            <td>{{ c.id }}</td>
+            <td>{{ c.data_abertura }}</td>
+            <td>{{ c.descricao }}</td>
+            <td>{{ c.status }}</td>
+            <td>{{ c.data_fechamento }}</td>
             <td>
-                <a href="{% url 'cliente_update' pk=cli.id %}">
-                    <i class="fas fa-edit"></i>
-                </a>
-                <a href="{% url 'cliente_delete' pk=cli.id %}">
-                    <i class="fas fa-trash-alt"></i>
+                <a href="{% url 'chamado_interacao_lista' pk=c.id %}">
+                    <i class="fas fa-info"></i>
                 </a>
             </td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
-<a href="{% url 'cliente_create' %}">
+<a href="{% url 'chamado_create' %}">
     <button type="submit" class="btn btn-primary">
-        Cadastrar
+        Abrir novo chamado
     </button>
 </a>
+
+{% if messages %}
+<div class="row mt-3">
+    <div class="col-3">
+    {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}danger{% else %}{{ message.tags }}{% endif %}{% endif %}" role="alert">
+            {{ message }}
+         </div>
+    {% endfor %}
+    </div>
+</div>
+{% endif %}
 
 {% endblock content %}

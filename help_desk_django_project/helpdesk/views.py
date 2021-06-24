@@ -141,18 +141,30 @@ def atendente_delete(request, pk):
 
 @login_required(login_url='cliente_login')
 def chamado_create(request):
-    ChamadoFormSet = inlineformset_factory(Cliente, Chamado, fields=('descricao','data_abertura', 'data_fechamento'), extra=10)
-    cliente = Cliente.objects.get(user_id=request.user.id)
+    ChamadoFormSet = inlineformset_factory(Cliente, Chamado, fields="__all__")
+    fk_cliente = Cliente.objects.get(user_id=request.user.id)
+    data = {
+        'status':'A',
+    }
     #formset = ChamadoFormSet(queryset=Chamado.objects.none(),instance=cliente)
     formset = ChamadoForm(request.POST)
     if request.method == 'POST':
         form = ChamadoForm(request.POST)
-        formset = ChamadoFormSet(request.POST, instance=cliente)
+        formset = ChamadoFormSet(request.POST, data, instance=fk_cliente)
         if formset.is_valid():
             formset.save()
-            return redirect('chamado_list')
+            messages.success(request, 'Chamado aberto!')
+            return redirect('chamado_list', request.user.id)
+        else:
+            messages.error(request, 'Houve um problema ao tentar abrir o chamado.')
+            return redirect('chamado_list', request.user.id)
     context = {'form': formset}
     return render(request, 'chamado/chamado_form.html', context)
+
+def chamado_list(request, pk):
+    chamado = Atendente.objects.filter(pk=pk)
+    chamados = {'chamado': chamado}
+    return render(request, 'chamado/chamado_list.html', chamados)
 
 def chamado_interacao_create(request, chamado, template_name='chamado/chamadoInteracao_form.html'):
     chamado = Chamado.objects.get(pk=chamado)

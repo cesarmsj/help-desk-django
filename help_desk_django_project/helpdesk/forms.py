@@ -17,10 +17,9 @@ class CreateUserForm(UserCreationForm):
 class ChamadoForm(ModelForm):
     class Meta:
         model = Chamado
-        #fields = ['descricao']
         fields = '__all__'
         widgets = {
-            'descricao': forms.Textarea(attrs={'class': 'form-control', 'type': 'date', 'required': 'required'}),
+            'descricao': forms.Textarea(attrs={'class': 'form-control', 'type': 'text', 'required': 'required'}),
         }
 
 class CreateChamadoInteracaoForm(ModelForm):

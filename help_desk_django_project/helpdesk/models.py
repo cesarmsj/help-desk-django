@@ -46,8 +46,8 @@ class Chamado(BaseModel):
 
     descricao = models.CharField(max_length=200)
     status = models.CharField(max_length=1, choices=STATUS, default='A')
-    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, null=True)
-    atendente = models.ForeignKey(Atendente, on_delete=models.CASCADE, null=True)
+    fk_cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, null=True)
+    fk_atendente = models.ForeignKey(Atendente, on_delete=models.CASCADE, null=True)
     data_abertura = models.DateTimeField(auto_now_add=True, blank=True)
     data_fechamento = models.DateTimeField(null=True, blank=True)
 

@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f0ad06ff-9190-46f6-8bb5-5934aeaf9612" name="Default Changelist" comment="Ajustadas algumas rotas.">
+    <list default="true" id="f0ad06ff-9190-46f6-8bb5-5934aeaf9612" name="Default Changelist" comment="Foram corrigidos alguns erros. Ainda tentando resolver problema de cadastro de chamados.">
       <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/help_desk_django_project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/help_desk_django_project/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado/chamado_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado/chamado_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado/chamado_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado/chamado_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,6 +50,9 @@
         <option name="url" value="https://github.com/cesarmsj/help-desk-django" />
       </UrlAndAccount>
     </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="1uHYuKWM0A6PhozB5N8mVikIVjR" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -193,7 +192,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624496515377</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Foram corrigidos alguns erros. Ainda tentando resolver problema de cadastro de chamados.">
+      <created>1624509533285</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1624509533285</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -218,6 +224,7 @@
     <MESSAGE value="Resolvi a linkagem do cliente com o usuário padrão do django. Também ajustei as mensagens de sucesso e erro." />
     <MESSAGE value="Algumas correções realizadas." />
     <MESSAGE value="Ajustadas algumas rotas." />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajustadas algumas rotas." />
+    <MESSAGE value="Foram corrigidos alguns erros. Ainda tentando resolver problema de cadastro de chamados." />
+    <option name="LAST_COMMIT_MESSAGE" value="Foram corrigidos alguns erros. Ainda tentando resolver problema de cadastro de chamados." />
   </component>
 </project>

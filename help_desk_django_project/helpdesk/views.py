@@ -135,24 +135,20 @@ def atendente_create(request, template_name='atendente/atendente_form.html'):
 
 @login_required(login_url='cliente_login')
 def chamado_create(request, pk):
-
-    ChamadoFormSet = inlineformset_factory(Cliente, Chamado, fields=('descricao',), extra=1, validate_min=True )
+    form = ChamadoForm(request.POST)
     cliente = Cliente.objects.get(user_id=pk)
-
-    formset = ChamadoFormSet(queryset=Chamado.objects.none(),instance=cliente)
+    form.instance.fk_cliente = cliente
 
     if request.method == 'POST':
-        form = ChamadoForm(request.POST)
-        formset = ChamadoFormSet(request.POST, instance=cliente)
+        if form.is_valid():
+            form.save()
 
-        if formset.is_valid():
-            formset.save()
             messages.success(request, 'Chamado aberto!')
             return redirect('chamado_list', pk=pk)
         else:
             messages.error(request, 'Houve um problema ao tentar abrir o chamado.')
             return redirect('chamado_list', pk=pk)
-    context = {'form': formset}
+    context = {'form': form}
     return render(request, 'chamado/chamado_form.html', context)
 
 def chamado_list(request, pk):

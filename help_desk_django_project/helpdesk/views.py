@@ -1,5 +1,3 @@
-import datetime
-
 from django.shortcuts import render, redirect
 from django.forms import inlineformset_factory
 
@@ -38,16 +36,14 @@ def user_logout(request):
         return redirect('home')
 
 @login_required(login_url='cliente_login')
-def cliente_home(request, template_name='cliente/cliente_home.html'):
-    chamado = Chamado.objects.all()
-    chamados = {'chamado': chamado}
-    return render(request, template_name, chamados)
+def cliente_home(request):
+    return render(request, 'cliente/cliente_home.html')
 
 @login_required(login_url='cliente_login')
-def cliente_list(request, template_name='cliente/cliente_list.html'):
-    cliente = Cliente.objects.all()
-    clientes = {'cliente': cliente}
-    return render(request, template_name, clientes)
+#def cliente_list(request, template_name='cliente/cliente_list.html'):
+#    cliente = Cliente.objects.all()
+#    clientes = {'cliente': cliente}
+#    return render(request, template_name, clientes)
 
 
 def cliente_create(request, template_name='cliente/cliente_form.html'):
@@ -68,18 +64,16 @@ def cliente_create(request, template_name='cliente/cliente_form.html'):
     return render(request, template_name, context)
 
 @login_required(login_url='atendente_login')
-def cliente_delete(request, pk):
-    cliente = Cliente.objects.get(pk=pk)
-    if request.method == "POST":
-        cliente.delete()
-        return redirect('cliente_list')
-    return render(request, 'cliente/cliente_delete.html', {'cliente': cliente})
+#def cliente_delete(request, pk):
+#    cliente = Cliente.objects.get(pk=pk)
+#    if request.method == "POST":
+#        cliente.delete()
+#        return redirect('cliente_list')
+#    return render(request, 'cliente/cliente_delete.html', {'cliente': cliente})
 
 @login_required(login_url='atendente_login')
-def atendente_home(request, template_name='atendente/atendente_home.html'):
-    chamado = Chamado.objects.all()
-    chamados = {'chamado': chamado}
-    return render(request, template_name, chamados)
+def atendente_home(request):
+    return render(request, 'atendente/atendente_home.html')
 
 def atendente_login(request):
     if request.user.is_authenticated:
@@ -100,10 +94,10 @@ def atendente_login(request):
         return render(request, 'cliente/cliente_login.html', context)
 
 @login_required(login_url='atendente_login')
-def atendente_list(request, template_name='atendente/atendente_list.html'):
-    atendente = Atendente.objects.all()
-    atendentes = {'cliente': atendente}
-    return render(request, template_name, atendentes)
+#def atendente_list(request, template_name='atendente/atendente_list.html'):
+#    atendente = Atendente.objects.all()
+#    atendentes = {'cliente': atendente}
+#    return render(request, template_name, atendentes)
 
 def atendente_create(request, template_name='atendente/atendente_form.html'):
     if request.user.is_authenticated:
@@ -132,32 +126,32 @@ def atendente_create(request, template_name='atendente/atendente_form.html'):
 #    return render(request, template_name, {'form': form})
 
 @login_required(login_url='atendente_login')
-def atendente_delete(request, pk):
-    atendente = Atendente.objects.get(pk=pk)
-    if request.method == "POST":
-        atendente.delete()
-        return redirect('atendente_list')
-    return render(request, 'atendente_delete', {'atendente': atendente})
+#def atendente_delete(request, pk):
+#    atendente = Atendente.objects.get(pk=pk)
+#    if request.method == "POST":
+#        atendente.delete()
+#        return redirect('atendente_list')
+#    return render(request, 'atendente_delete', {'atendente': atendente})
 
 @login_required(login_url='cliente_login')
-def chamado_create(request):
-    ChamadoFormSet = inlineformset_factory(Cliente, Chamado, fields="__all__")
-    fk_cliente = Cliente.objects.get(user_id=request.user.id)
-    data = {
-        'status':'A',
-    }
-    #formset = ChamadoFormSet(queryset=Chamado.objects.none(),instance=cliente)
-    formset = ChamadoForm(request.POST)
+def chamado_create(request, pk):
+
+    ChamadoFormSet = inlineformset_factory(Cliente, Chamado, fields=('descricao',), extra=1, validate_min=True )
+    cliente = Cliente.objects.get(user_id=pk)
+
+    formset = ChamadoFormSet(queryset=Chamado.objects.none(),instance=cliente)
+
     if request.method == 'POST':
         form = ChamadoForm(request.POST)
-        formset = ChamadoFormSet(request.POST, data, instance=fk_cliente)
+        formset = ChamadoFormSet(request.POST, instance=cliente)
+
         if formset.is_valid():
             formset.save()
             messages.success(request, 'Chamado aberto!')
-            return redirect('chamado_list', request.user.id)
+            return redirect('chamado_list', pk=pk)
         else:
             messages.error(request, 'Houve um problema ao tentar abrir o chamado.')
-            return redirect('chamado_list', request.user.id)
+            return redirect('chamado_list', pk=pk)
     context = {'form': formset}
     return render(request, 'chamado/chamado_form.html', context)
 

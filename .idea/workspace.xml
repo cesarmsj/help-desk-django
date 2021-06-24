@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f0ad06ff-9190-46f6-8bb5-5934aeaf9612" name="Default Changelist" comment="Algumas correções realizadas.">
+    <list default="true" id="f0ad06ff-9190-46f6-8bb5-5934aeaf9612" name="Default Changelist" comment="Ajustadas algumas rotas.">
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/help_desk_django_project/help_desk_django_project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/help_desk_django_project/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado/chamado_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado/chamado_form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado/chamado_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado/chamado_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/home/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/home/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/views.py" afterDir="false" />
     </list>
@@ -67,7 +68,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.language" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -185,7 +186,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624493640752</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Ajustadas algumas rotas.">
+      <created>1624496515377</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1624496515377</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -209,6 +217,7 @@
     <MESSAGE value="Criar a página de criação do chamado.&#10;&#10;Falta agora ajustar o cadastro do chamado,&#10;onde:&#10;&#10;data_abertura = data e hora atual;&#10;fk_cliente = cliente logado;" />
     <MESSAGE value="Resolvi a linkagem do cliente com o usuário padrão do django. Também ajustei as mensagens de sucesso e erro." />
     <MESSAGE value="Algumas correções realizadas." />
-    <option name="LAST_COMMIT_MESSAGE" value="Algumas correções realizadas." />
+    <MESSAGE value="Ajustadas algumas rotas." />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajustadas algumas rotas." />
   </component>
 </project>

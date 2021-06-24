@@ -3,13 +3,16 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+class BaseModel(models.Model):
+    objects = models.Manager()
+    class Meta:
+        abstract = True
 
-class Cliente(models.Model):
+class Cliente(BaseModel):
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
-        primary_key=True,
-        default=''
+        default=1,
     )
 
     class Meta:
@@ -22,19 +25,18 @@ def update_profile_signal(sender, instance, created, **kwargs):
         Cliente.objects.create(user=instance)
     instance.cliente.save()
 
-class Atendente(models.Model):
+class Atendente(BaseModel):
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
-        primary_key=True,
-        default=''
+        default=1,
     )
 
     class Meta:
         managed: False
         db_table = 'helpdesk_atendente'
 
-class Chamado(models.Model):
+class Chamado(BaseModel):
 
     STATUS = (
         ('A', 'Aberto'),
@@ -43,9 +45,9 @@ class Chamado(models.Model):
     )
 
     descricao = models.CharField(max_length=200)
-    status = models.CharField(max_length=1, choices=STATUS)
-    fk_cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, default='')
-    fk_atendente = models.ForeignKey(Atendente, on_delete=models.CASCADE, default='')
+    status = models.CharField(max_length=1, choices=STATUS, default='A')
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, null=True)
+    atendente = models.ForeignKey(Atendente, on_delete=models.CASCADE, null=True)
     data_abertura = models.DateTimeField(auto_now_add=True, blank=True)
     data_fechamento = models.DateTimeField(null=True, blank=True)
 

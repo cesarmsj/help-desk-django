@@ -1,4 +1,5 @@
 {% extends '../base.html' %}
+{% load widget_tweaks %}
 
 {% block content %}
 <div class="row mb-3">
@@ -12,12 +13,16 @@
         <form method="post" action="">
             {% csrf_token %}
 
-            <div class="input-group mb-3">
-                <div class="input-group-append">
-                     <span class="input-group-text"><i class="fas fa-ticket-alt"></i></span>
+            {% for field in form %}
+                <div class="input-group mb-3">
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="fas fa-ticket-alt"></i></span>
+                         {{ field.descricao|add_class:'form-control'|attr:"rows:20"|attr:"cols:20" }}
+                     </div>
+
                 </div>
-                {{ form.descricao }}
-            </div>
+            {% endfor %}
+
 
             <button type="submit" class="btn btn-primary">
                 Salvar

@@ -19,15 +19,13 @@ class ChamadoForm(ModelForm):
         model = Chamado
         fields = ['descricao']
         widgets = {
-            'descricao': forms.Textarea(attrs={'class': 'form-control', 'type': 'date', 'required': 'required', 'placeholder':'Em que podemos lhe ajudar? Escreva aqui.'}),
+            'descricao': forms.Textarea(attrs={'class': 'form-control', 'type': 'text', 'required': 'required', 'placeholder':'Em que podemos lhe ajudar? Escreva aqui.'}),
         }
 
-
-
-class CreateChamadoInteracaoForm(ModelForm):
+class ChamadoInteracaoForm(ModelForm):
     class Meta:
         model = Chamado_Interacao
-        fields = ['descricao']
+        fields = ['interacao']
         widgets = {
-            'descricao': forms.Textarea(attrs={'class': 'form-control', 'type': 'date', 'required': 'required'}),
+            'interacao': forms.Textarea(attrs={'class': 'form-control', 'type': 'text', 'required': 'required', 'placeholder':'Em que podemos lhe ajudar? Escreva aqui.', 'rows': 2, 'maxlength':100}),
         }

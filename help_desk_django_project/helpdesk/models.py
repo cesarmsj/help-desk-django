@@ -57,10 +57,8 @@ class Chamado(BaseModel):
 class Chamado_Interacao(models.Model):
 
     fk_chamado = models.ForeignKey(Chamado, on_delete=models.CASCADE)
-    descricao = models.CharField(max_length=200)
-    data_abertura = models.DateTimeField(auto_now_add=True, blank=True)
-    data_fechamento = models.DateTimeField(null=True, blank=True)
-    teste = models.CharField(max_length=200)
+    interacao = models.CharField(max_length=200)
+    data_interacao = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
         return self.descricao

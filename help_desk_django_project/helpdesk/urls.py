@@ -19,4 +19,5 @@ urlpatterns = [
     path('chamado_create/<str:pk>/', chamado_create, name='chamado_create'),
     path('chamado_list/', chamado_list, name='chamado_list'),
     path('chamado_interacao_list/<str:chamado>/', chamado_interacao_list, name='chamado_interacao_list'),
+    path('chamado_interacao_create/<str:id_chamado>/', chamado_interacao_create, name='chamado_interacao_create'),
 ]

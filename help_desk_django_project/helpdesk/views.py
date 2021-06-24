@@ -142,7 +142,6 @@ def chamado_create(request, pk):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
-
             messages.success(request, 'Chamado aberto!')
             return redirect('chamado_list')
         else:
@@ -158,16 +157,24 @@ def chamado_list(request):
     context = {'chamado': chamado}
     return render(request, 'chamado/chamado_list.html', context)
 
-def chamado_interacao_create(request, chamado, template_name='chamado/chamado_interacao_form.html'):
-    chamado = Chamado.objects.get(pk=chamado)
-    form = CreateChamadoInteracaoForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect('chamado_interacao_list', pk=chamado.id)
-    return render(request, template_name, {'form': form})
+def chamado_interacao_create(request, id_chamado):
+    form = ChamadoInteracaoForm(request.POST)
+    chamado = Chamado.objects.get(id=id_chamado)
+    form.instance.fk_chamado = chamado
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Interação adicionada!')
+            return redirect('chamado_interacao_list', id_chamado)
+        else:
+            messages.error(request, 'Houve um problema ao tentar adicionar a interação ao chamado.')
+            return redirect('chamado_interacao_list', id_chamado)
+    context = {'form': form, 'chamado': id_chamado}
+    return render(request, 'chamado_interacao/chamado_interacao_form.html', context)
 
 def chamado_interacao_list(request, chamado):
-    chamado_interacao = Atendente.objects.filter(chamado=chamado)
-    chamado_interacoes = {'chamado_interacao_list': chamado_interacao}
-    return render(request, 'chamado_interacao/chamado_interacao_list.html', chamado_interacoes)
+    chamado_interacao = Chamado_Interacao.objects.filter(fk_chamado=chamado)
+    context = {'interacao': chamado_interacao, 'chamado': chamado }
+    return render(request, 'chamado_interacao/chamado_interacao_list.html', context)
 

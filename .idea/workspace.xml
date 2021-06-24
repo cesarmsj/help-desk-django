@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f0ad06ff-9190-46f6-8bb5-5934aeaf9612" name="Default Changelist" comment="Adicionado novos arquivos.">
+    <list default="true" id="f0ad06ff-9190-46f6-8bb5-5934aeaf9612" name="Default Changelist" comment="Listagem de Chamados filtrado pelo cliente logado OK">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado/chamado_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado/chamado_form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado/chamado_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado/chamado_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado_interacao/chamadoInteracao_delete.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado_interacao/chamado_interacao_delete.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado_interacao/chamadoInteracao_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado_interacao/chamado_interacao_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado_interacao/chamadoInteracao_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado_interacao/chamado_interacao_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado_interacao/chamado_interacao_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado_interacao/chamado_interacao_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado_interacao/chamado_interacao_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado_interacao/chamado_interacao_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/views.py" afterDir="false" />
     </list>
@@ -217,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624561089619</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Listagem de Chamados filtrado pelo cliente logado OK">
+      <created>1624571375990</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1624571375990</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -245,6 +251,7 @@
     <MESSAGE value="Foram corrigidos alguns erros. Ainda tentando resolver problema de cadastro de chamados." />
     <MESSAGE value="Corrigido cadastro de chamados." />
     <MESSAGE value="Adicionado novos arquivos." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adicionado novos arquivos." />
+    <MESSAGE value="Listagem de Chamados filtrado pelo cliente logado OK" />
+    <option name="LAST_COMMIT_MESSAGE" value="Listagem de Chamados filtrado pelo cliente logado OK" />
   </component>
 </project>

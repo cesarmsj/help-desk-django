@@ -140,18 +140,19 @@ def atendente_delete(request, pk):
     return render(request, 'atendente_delete', {'atendente': atendente})
 
 @login_required(login_url='cliente_login')
-def chamado_create(request, pk):
-    ChamadoFormSet = inlineformset_factory(Cliente, Chamado, fields=('data_abertura', 'data_fechamento'))
-    cliente_logged = Cliente.objects.get(id=pk)
-    cliente = cliente_logged.id
+def chamado_create(request):
+    ChamadoFormSet = inlineformset_factory(Cliente, Chamado, fields=('descricao','data_abertura', 'data_fechamento'), extra=10)
+    cliente = Cliente.objects.get(user_id=request.user.id)
+    #formset = ChamadoFormSet(queryset=Chamado.objects.none(),instance=cliente)
+    formset = ChamadoForm(request.POST)
     if request.method == 'POST':
-        form = ChamadoForm(request.POST or None)
+        form = ChamadoForm(request.POST)
         formset = ChamadoFormSet(request.POST, instance=cliente)
         if formset.is_valid():
-            form.save()
+            formset.save()
             return redirect('chamado_list')
-    context = {'form':formset}
-    return render(request, 'chamado/chamado_create.html', context)
+    context = {'form': formset}
+    return render(request, 'chamado/chamado_form.html', context)
 
 def chamado_interacao_create(request, chamado, template_name='chamado/chamadoInteracao_form.html'):
     chamado = Chamado.objects.get(pk=chamado)

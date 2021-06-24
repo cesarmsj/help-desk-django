@@ -8,17 +8,13 @@
 </div>
 <div class="row">
     <div class="col-12">
-        <!--
-        {% if form.errors %}
-        <p>{{ form.errors }}</p>
-        {% endif %}
-        -->
+
         <form method="post" action="">
             {% csrf_token %}
 
             <div class="input-group mb-3">
                 <div class="input-group-append">
-                     <span class="input-group-text"><i class="fas fa-user"></i></span>
+                     <span class="input-group-text"><i class="fas fa-ticket-alt"></i></span>
                 </div>
                 {{ form.descricao }}
             </div>

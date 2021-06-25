@@ -3,7 +3,15 @@
 {% block content %}
 <div class="row mb-3">
     <div class="col-12">
-       <h1>Novo Chamado</h1>
+       {% if filter == 'atendente_logged' %}
+            <h1>Chamados que {{ username }} está atendendo</h1>
+        {% elif filter == 'status_a' %}
+            <h1>Chamados abertos</h1>
+        {% elif filter == 'cliente_logged' %}
+            <h1>Chamados do cliente {{ username }}</h1>
+        {% else %}
+            <h1>Todos os chamados</h1>
+        {% endif %}
      </div>
 </div>
 <div class="row">
@@ -17,7 +25,7 @@
                     <th>Status atual</th>
                     <th>Atendente</th>
                     <th>Data de fechamento</th>
-                    <th>Detalhes</th>
+                    <th>Opções</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,8 +50,18 @@
                         {% endif %}
                     </td>
                     <td>
+                        {% if filter == 'status_a' %}
+                        <a href="{% url 'chamado_update' pk=c.id %}">
+                            <i class="fas fa-hands-helping"></i>
+                        </a>
+                         {% endif %}
+                        {% if filter == 'atendente_logged' %}
+                        <a href="{% url 'chamado_update' pk=c.id %}">
+                            <i class="far fa-check-square"></i>
+                        </a>
+                         {% endif %}
                         <a href="{% url 'chamado_interacao_list' chamado=c.id %}">
-                            <i class="fas fa-info"></i>
+                            <i class="fas fa-info ml-2"></i>
                         </a>
                     </td>
                 </tr>
@@ -51,11 +69,17 @@
             </tbody>
         </table>
     </div>
-    <a href="{% url 'chamado_create' request.user.id %}">
-        <button type="submit" class="btn btn-primary">
-            Abrir novo chamado
-        </button>
-    </a>
+    {% if filter == 'atendente_logged' %}
+        <a href="{% url 'chamado_list' filter='status_a' %}">
+            Ver chamados abertos
+        </a>
+    {% else %}
+        <a href="{% url 'chamado_create' request.user.id %}">
+            <button type="submit" class="btn btn-primary">
+                Abrir novo chamado
+            </button>
+        </a>
+    {% endif %}
 </div>
 {% if messages %}
 <div class="row mt-3">

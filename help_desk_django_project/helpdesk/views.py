@@ -1,9 +1,11 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.forms import inlineformset_factory
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 from .models import *
 from .forms import *
@@ -181,16 +183,19 @@ def chamado_interacao_list(request, chamado):
 @login_required(login_url='cliente_login')
 def chamado_list(request, filter):
     if filter == 'atendente_logged':
-        cli = Atendente.objects.get(user_id=request.user.id)
-        chamado = Chamado.objects.filter(fk_atendente=cli.id)
+        atendente = Atendente.objects.get(user_id=request.user.id)
+        username = request.user.username
+        chamado = Chamado.objects.filter(fk_atendente=atendente.id)
     elif filter == 'cliente_logged':
-        cli = Cliente.objects.get(user_id=request.user.id)
-        chamado = Chamado.objects.filter(fk_cliente=cli.id)
+        cliente = Cliente.objects.get(user_id=request.user.id)
+        username = request.user.username
+        chamado = Chamado.objects.filter(fk_cliente=cliente.id)
     elif filter == 'status_a':
+        username = request.user.username
         chamado = Chamado.objects.filter(status='A')
     elif filter == 'all':
         chamado = Chamado.objects.all
-    context = {'chamado': chamado}
+    context = {'chamado': chamado, 'filter': filter, 'username': username}
     return render(request, 'chamado/chamado_list.html', context)
 
 #### UPDATE #####
@@ -205,6 +210,23 @@ def chamado_list(request, filter):
 #    else:
 #        form = AtendenteForm(instance=atendente)
 #    return render(request, template_name, {'form': form})
+def chamado_update(request, pk):
+
+    chamado = Chamado.objects.get(id=pk)
+
+    form = ChamadoForm(instance=chamado)
+    atendente = Atendente.objects.get(user_id=request.user.id)
+    form.instance.fk_atendente = atendente
+    form.instance.status = 'E'
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'Chamado atendido!')
+        url = reverse('chamado_list', kwargs={'filter':'atendente_logged'})
+        return HttpResponseRedirect(url)
+    else:
+        messages.error(request, 'Houve um erro ao tentar atender o chamado.')
+        url = reverse('chamado_list', kwargs={'filter':'atendente_logged'})
+        return HttpResponseRedirect(url)
 
 #### DELETE #####
 

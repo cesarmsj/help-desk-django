@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f0ad06ff-9190-46f6-8bb5-5934aeaf9612" name="Default Changelist" comment="Interações OK">
+    <list default="true" id="f0ad06ff-9190-46f6-8bb5-5934aeaf9612" name="Default Changelist" comment="Resolver problema no cadastro de clientes e funcionários.">
       <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/atendente/atendente_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/atendente/atendente_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/atendente/atendente_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/atendente/atendente_home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/atendente/atendente_login.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/atendente/atendente_login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/atendente/atendente_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/atendente/atendente_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/home/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/home/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/views.py" afterDir="false" />
@@ -246,7 +244,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624578512598</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Interações OK">
+      <created>1624622033890</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1624622033890</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

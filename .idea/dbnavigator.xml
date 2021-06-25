@@ -32,7 +32,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="20ea6f11-8295-4e61-9333-3c405918424a">
-      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select * from auth_user
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select * from helpdesk_cliente
 
 insert into helpdesk_chamado(descricao, data_abertura, cliente_id, status) values ('teste', current_date, 1, 'A')]]></console>
     </connection>

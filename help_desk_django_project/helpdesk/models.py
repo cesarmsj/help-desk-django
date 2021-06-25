@@ -14,7 +14,6 @@ class Cliente(BaseModel):
         on_delete=models.CASCADE,
         default=1,
     )
-
     class Meta:
         managed: False
         db_table = 'helpdesk_cliente'

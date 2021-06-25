@@ -7,10 +7,21 @@
         <div id="home_art"></div>
     </div>
     <div class="col-6">
-         <div id="home_text">Suporte 24/7</div>
-         {% if request.user.is_authenticated %}
-            <a class="nav-link" href="{% url 'cliente_home' %}">Acessar minha página</a>
-         {% endif %}
+        <div class="row">
+
+                <div id="home_text">Suporte 24/7</div>
+
+        </div>
+         <div class="row">
+
+                  {% if request.user.is_authenticated %}
+                <a class="nav-link" href="{% url 'cliente_home' %}">Acessar minha página</a>
+                  {% else %}
+                 <p>Faz parte da nossa equipe? <a href="{% url 'atendente_login' %}">Ir para o portal do atendente</a></p>
+                  {% endif %}
+
+         </div>
+
     </div>
 
 </div>

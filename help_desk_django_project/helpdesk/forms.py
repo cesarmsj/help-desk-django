@@ -4,7 +4,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import Chamado, Chamado_Interacao
+from .models import Atendente, Chamado, Chamado_Interacao
 
 class CreateUserForm(UserCreationForm):
     class Meta:
@@ -13,6 +13,11 @@ class CreateUserForm(UserCreationForm):
         widgets = {
             'email': forms.EmailInput(attrs={'type': 'email', 'required': 'required'}),
         }
+
+class AtendenteForm(ModelForm):
+    class Meta:
+        model = Atendente
+        fields = ['user']
 
 class ChamadoForm(ModelForm):
     class Meta:

@@ -40,36 +40,39 @@ def cliente_home(request):
     return render(request, 'cliente/cliente_home.html')
 
 @login_required(login_url='cliente_login')
-#def cliente_list(request, template_name='cliente/cliente_list.html'):
-#    cliente = Cliente.objects.all()
-#    clientes = {'cliente': cliente}
-#    return render(request, template_name, clientes)
+def cliente_list(request, template_name='cliente/cliente_list.html'):
+    cliente = Cliente.objects.all()
+    clientes = {'cliente': cliente}
+    return render(request, template_name, clientes)
 
 
-def cliente_create(request, template_name='cliente/cliente_form.html'):
+def cliente_create(request):
     if request.user.is_authenticated:
         return redirect('cliente_home')
     else:
         form = CreateUserForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            user.refresh_from_db()
-            user.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, 'Conta criada para o usuário ' + username)
-
-            return redirect('cliente_login')
+        if request.method == 'POST':
+            if form.is_valid():
+                user = form.save()
+                user.refresh_from_db()
+                user.save()
+                username = form.cleaned_data.get('username')
+                messages.success(request, 'Conta criada para o cliente ' + username)
+                return redirect('cliente_login')
+            else:
+                messages.error(request, 'Erro ao tentar cadastrar o usuário')
+                return redirect('cliente_create')
 
     context = {'form': form}
-    return render(request, template_name, context)
+    return render(request, 'cliente/cliente_form.html', context)
 
 @login_required(login_url='atendente_login')
-#def cliente_delete(request, pk):
-#    cliente = Cliente.objects.get(pk=pk)
-#    if request.method == "POST":
-#        cliente.delete()
-#        return redirect('cliente_list')
-#    return render(request, 'cliente/cliente_delete.html', {'cliente': cliente})
+def cliente_delete(request, pk):
+    cliente = Cliente.objects.get(pk=pk)
+    if request.method == "POST":
+        cliente.delete()
+        return redirect('cliente_list')
+    return render(request, 'cliente/cliente_delete.html', {'cliente': cliente})
 
 @login_required(login_url='atendente_login')
 def atendente_home(request):
@@ -87,32 +90,48 @@ def atendente_login(request):
 
             if user is not None:
                 login(request, user)
-                return redirect('atendente_home')
+                #user_logged = User.objects.get(user_id=request.user.id)
+                #chamado = Chamado.objects.filter(fk_cliente=cli.id)
+                if Atendente.objects.filter(user_id=request.user.id).exists():
+                    return redirect('atendente_home')
+                elif Cliente.objects.filter(user_id=request.user.id).exists():
+                    return redirect('cliente_home')
+                else:
+                    messages.error(request, 'Houve uma falha ao tentar verificar o perfil do usuário')
+                    return redirect('home')
             else:
                 messages.error(request, 'Usuário ou senha incorreto')
         context = {}
-        return render(request, 'cliente/cliente_login.html', context)
+        return render(request, 'atendente/atendente_login.html', context)
 
-@login_required(login_url='atendente_login')
+#@login_required(login_url='atendente_login')
 #def atendente_list(request, template_name='atendente/atendente_list.html'):
 #    atendente = Atendente.objects.all()
 #    atendentes = {'cliente': atendente}
 #    return render(request, template_name, atendentes)
 
-def atendente_create(request, template_name='atendente/atendente_form.html'):
+def atendente_create(request):
     if request.user.is_authenticated:
         return redirect('atendente_home')
     else:
         form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'Conta criada para o usuário ' + user)
+        #atendente_form = AtendenteForm(request.POST or None)
 
-            return redirect('atendente_login')
+        if request.method == 'POST':
+            if form.is_valid(): #and atendente_form.is_valid():
+                user = form.save()
+                #atendente = atendente_form.save(commit=False)
+                #atendente.user = user
+                #atendente.save()
+                username = form.cleaned_data.get('username')
+                messages.success(request, 'Conta criada para o atendente ' + username)
+                return redirect('atendente_login')
+            else:
+                #messages.error(request, 'Erro ao tentar cadastrar o usuário')
+                return redirect('atendente_create')
 
     context = {'form': form}
-    return render(request, template_name, context)
+    return render(request, 'atendente/atendente_form.html', context)
 
 #def atendente_update(request, pk, template_name='atendente/atendente_form.html'):
 #    atendente = get_object_or_404(Atendente, pk=pk)

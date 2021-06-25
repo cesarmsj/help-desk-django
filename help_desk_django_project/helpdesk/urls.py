@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from .views import *
 
 urlpatterns = [
@@ -17,7 +17,7 @@ urlpatterns = [
 #    url(r'^cliente_update/(?P<pk>[0-9]+)', cliente_update, name='cliente_update'),
 #    path('cliente_delete/<str:pk>/', cliente_delete, name='cliente_delete'),
     path('chamado_create/<str:pk>/', chamado_create, name='chamado_create'),
-    path('chamado_list/', chamado_list, name='chamado_list'),
+    re_path('chamado_list/(?P<filter>\w+)/$', chamado_list, name='chamado_list'),
     path('chamado_interacao_list/<str:chamado>/', chamado_interacao_list, name='chamado_interacao_list'),
     path('chamado_interacao_create/<str:id_chamado>/', chamado_interacao_create, name='chamado_interacao_create'),
 ]

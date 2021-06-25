@@ -11,8 +11,10 @@
                 <div id="home_text">Suporte 24/7</div>
         </div>
          <div class="row">
-                  {% if request.user.is_authenticated %}
+                  {% if profile == 'cliente' %}
                 <a class="nav-link" href="{% url 'cliente_home' %}">Acessar minha página</a>
+                 {% elif profile == 'atendente' %}
+                <a class="nav-link" href="{% url 'atendente_home' %}">Acessar minha página</a>
                   {% else %}
                  <p>Faz parte da nossa equipe? <a href="{% url 'atendente_login' %}">Ir para o portal do atendente</a></p>
                   {% endif %}

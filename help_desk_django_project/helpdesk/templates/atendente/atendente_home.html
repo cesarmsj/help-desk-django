@@ -3,45 +3,30 @@
 {% block content %}
 <div class="row">
     <div class="col-12">
-       <h1>Chamados Abertos</h1>
+       <h1>Seja bem-vindo {{ request.user.username  }}</h1>
      </div>
 </div>
-<div class="row">
+<div class="row mt-4">
     <div class="col-12">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nº chamado</th>
-                    <th>Data do chamado</th>
-                    <th>Status</th>
-                    <th>Atendente</th>
-                    <th>Descrição</th>
-                    <th>Ver interações</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for c in chamado %}
-                <tr>
-                    <td>{{ c.id }}</td>
-                    <td>{{ c.status }}</td>
-                    <td>{{ c.data_chamado }}</td>
-                    <td>{{ c.atendente }}</td>
-                    <td>{{ c.descricao }}</td>
-                    <td>
-                        <a href="{% url 'chamado_interacao_lista' pk=c.id %}">
-                            <i class="fas fa-info"></i>
-                        </a>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        <a href="{% url 'chamado_create' pk=user.id %}">
-            <button type="submit" class="btn btn-primary">
-                Cadastrar novo chamado
-            </button>
-        </a>
+        <ul class="list-group">
+            <li class="list-group-item text-center">
+                <a href="{% url 'chamado_list' filter='atendente_logged' %}" class="text-decoration-none">
+                        Meus atendimentos
+                </a>
+            </li>
+            <li class="list-group-item text-center" class="text-decoration-none">
+                <a href="{% url 'chamado_list' filter='status_a' %}">
+                        Chamados em aberto
+                </a>
+            </li>
+            <li class="list-group-item text-center" class="text-decoration-none">
+                <a href="{% url 'chamado_list' filter='all' %}">
+                       Todos os chamados
+                </a>
+            </li>
+        </ul>
+
+
     </div>
 </div>
-
 {% endblock content %}

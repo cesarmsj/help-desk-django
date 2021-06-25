@@ -65,8 +65,14 @@ def user_logout(request):
 
 #### HOME #####
 
-def home(request, template_name='home/home.html'):
-    return render(request, template_name)
+def home(request):
+    if request.user.is_authenticated:
+        if Atendente.objects.filter(user_id=request.user.id).exists():
+            profile = 'atendente'
+        elif Cliente.objects.filter(user_id=request.user.id).exists():
+            profile = 'cliente'
+    context = { 'profile': profile }
+    return render(request, 'home/home.html', context )
 
 @login_required(login_url='cliente_login')
 def cliente_home(request):
@@ -173,9 +179,17 @@ def chamado_interacao_list(request, chamado):
     return render(request, 'chamado_interacao/chamado_interacao_list.html', context)
 
 @login_required(login_url='cliente_login')
-def chamado_list(request):
-    cli = Cliente.objects.get(user_id=request.user.id)
-    chamado = Chamado.objects.filter(fk_cliente=cli.id)
+def chamado_list(request, filter):
+    if filter == 'atendente_logged':
+        cli = Atendente.objects.get(user_id=request.user.id)
+        chamado = Chamado.objects.filter(fk_atendente=cli.id)
+    elif filter == 'cliente_logged':
+        cli = Cliente.objects.get(user_id=request.user.id)
+        chamado = Chamado.objects.filter(fk_cliente=cli.id)
+    elif filter == 'status_a':
+        chamado = Chamado.objects.filter(status='A')
+    elif filter == 'all':
+        chamado = Chamado.objects.all
     context = {'chamado': chamado}
     return render(request, 'chamado/chamado_list.html', context)
 

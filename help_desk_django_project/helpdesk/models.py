@@ -14,16 +14,9 @@ class Cliente(BaseModel):
         on_delete=models.CASCADE,
         default=1,
     )
-
     class Meta:
         managed: False
         db_table = 'helpdesk_cliente'
-
-@receiver(post_save, sender=User)
-def update_profile_signal(sender, instance, created, **kwargs):
-    if created:
-        Cliente.objects.create(user=instance)
-    instance.cliente.save()
 
 class Atendente(BaseModel):
     user = models.OneToOneField(

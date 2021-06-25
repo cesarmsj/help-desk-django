@@ -38,7 +38,7 @@
 
 {% if messages %}
 <div class="row mt-3">
-    <div class="col-3">
+    <div class="col-4">
     {% for message in messages %}
         <div class="alert {% if message.tags %}alert-{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}danger{% else %}{{ message.tags }}{% endif %}{% endif %}" role="alert">
             {{ message }}

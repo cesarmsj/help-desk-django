@@ -10,8 +10,7 @@ from .forms import *
 
 # Create your views here.
 
-def home(request, template_name='home/home.html'):
-    return render(request, template_name)
+#### AUTH ####
 
 def cliente_login(request):
     if request.user.is_authenticated:
@@ -22,58 +21,19 @@ def cliente_login(request):
             password = request.POST.get('password')
 
             user = authenticate(request, username=username, password=password)
-
             if user is not None:
                 login(request, user)
-                return redirect('cliente_home')
+                if Atendente.objects.filter(user_id=request.user.id).exists():
+                    return redirect('atendente_home')
+                elif Cliente.objects.filter(user_id=request.user.id).exists():
+                    return redirect('cliente_home')
+                else:
+                    messages.error(request, 'Houve uma falha ao tentar verificar o perfil do usuário')
+                    return redirect('user_logout')
             else:
                 messages.error(request, 'Usuário ou senha incorreto')
         context = {}
         return render(request, 'cliente/cliente_login.html', context)
-
-def user_logout(request):
-        logout(request)
-        return redirect('home')
-
-@login_required(login_url='cliente_login')
-def cliente_home(request):
-    return render(request, 'cliente/cliente_home.html')
-
-@login_required(login_url='cliente_login')
-#def cliente_list(request, template_name='cliente/cliente_list.html'):
-#    cliente = Cliente.objects.all()
-#    clientes = {'cliente': cliente}
-#    return render(request, template_name, clientes)
-
-
-def cliente_create(request, template_name='cliente/cliente_form.html'):
-    if request.user.is_authenticated:
-        return redirect('cliente_home')
-    else:
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            user.refresh_from_db()
-            user.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, 'Conta criada para o usuário ' + username)
-
-            return redirect('cliente_login')
-
-    context = {'form': form}
-    return render(request, template_name, context)
-
-@login_required(login_url='atendente_login')
-#def cliente_delete(request, pk):
-#    cliente = Cliente.objects.get(pk=pk)
-#    if request.method == "POST":
-#        cliente.delete()
-#        return redirect('cliente_list')
-#    return render(request, 'cliente/cliente_delete.html', {'cliente': cliente})
-
-@login_required(login_url='atendente_login')
-def atendente_home(request):
-    return render(request, 'atendente/atendente_home.html')
 
 def atendente_login(request):
     if request.user.is_authenticated:
@@ -87,51 +47,74 @@ def atendente_login(request):
 
             if user is not None:
                 login(request, user)
-                return redirect('atendente_home')
+                if Atendente.objects.filter(user_id=request.user.id).exists():
+                    return redirect('atendente_home')
+                elif Cliente.objects.filter(user_id=request.user.id).exists():
+                    return redirect('cliente_home')
+                else:
+                    messages.error(request, 'Houve uma falha ao tentar verificar o perfil do usuário')
+                    return redirect('user_logout')
             else:
                 messages.error(request, 'Usuário ou senha incorreto')
         context = {}
-        return render(request, 'cliente/cliente_login.html', context)
+        return render(request, 'atendente/atendente_login.html', context)
+
+def user_logout(request):
+        logout(request)
+        return redirect('home')
+
+#### HOME #####
+
+def home(request, template_name='home/home.html'):
+    return render(request, template_name)
+
+@login_required(login_url='cliente_login')
+def cliente_home(request):
+    return render(request, 'cliente/cliente_home.html')
 
 @login_required(login_url='atendente_login')
-#def atendente_list(request, template_name='atendente/atendente_list.html'):
-#    atendente = Atendente.objects.all()
-#    atendentes = {'cliente': atendente}
-#    return render(request, template_name, atendentes)
+def atendente_home(request):
+    return render(request, 'atendente/atendente_home.html')
 
-def atendente_create(request, template_name='atendente/atendente_form.html'):
+#### CREATE ####
+
+def cliente_create(request):
+    if request.user.is_authenticated:
+        return redirect('cliente_home')
+    else:
+        form = CreateUserForm(request.POST)
+        cliente_form = ClienteForm(request.POST)
+
+        if form.is_valid() and cliente_form.is_valid():
+            user = form.save()
+            cliente = cliente_form.save(commit=False)
+            cliente.user = user
+            cliente.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, 'Conta criada para o atendente ' + username)
+            return redirect('atendente_login')
+
+    context = {'form': form}
+    return render(request, 'cliente/cliente_form.html', context)
+
+def atendente_create(request):
     if request.user.is_authenticated:
         return redirect('atendente_home')
     else:
         form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'Conta criada para o usuário ' + user)
+        atendente_form = AtendenteForm(request.POST)
 
+        if form.is_valid() and atendente_form.is_valid():
+            user = form.save()
+            atendente = atendente_form.save(commit=False)
+            atendente.user = user
+            atendente.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, 'Conta criada para o atendente ' + username)
             return redirect('atendente_login')
 
-    context = {'form': form}
-    return render(request, template_name, context)
-
-#def atendente_update(request, pk, template_name='atendente/atendente_form.html'):
-#    atendente = get_object_or_404(Atendente, pk=pk)
-#    if request.method == "POST":
-#        form = AtendenteForm(request.POST, instance=atendente)
-#        if form.is_valid():
-#            cliente = form.save()
-#            return redirect('atendente_list')
-#    else:
-#        form = AtendenteForm(instance=atendente)
-#    return render(request, template_name, {'form': form})
-
-@login_required(login_url='atendente_login')
-#def atendente_delete(request, pk):
-#    atendente = Atendente.objects.get(pk=pk)
-#    if request.method == "POST":
-#        atendente.delete()
-#        return redirect('atendente_list')
-#    return render(request, 'atendente_delete', {'atendente': atendente})
+    context = {'form': form, 'atendente_form': atendente_form}
+    return render(request, 'atendente/atendente_form.html', context)
 
 @login_required(login_url='cliente_login')
 def chamado_create(request, pk):
@@ -150,13 +133,8 @@ def chamado_create(request, pk):
     context = {'form': form}
     return render(request, 'chamado/chamado_form.html', context)
 
+@login_required(login_url='atendente_login')
 @login_required(login_url='cliente_login')
-def chamado_list(request):
-    cli = Cliente.objects.get(user_id=request.user.id)
-    chamado = Chamado.objects.filter(fk_cliente=cli.id)
-    context = {'chamado': chamado}
-    return render(request, 'chamado/chamado_list.html', context)
-
 def chamado_interacao_create(request, id_chamado):
     form = ChamadoInteracaoForm(request.POST)
     chamado = Chamado.objects.get(id=id_chamado)
@@ -173,8 +151,75 @@ def chamado_interacao_create(request, id_chamado):
     context = {'form': form, 'chamado': id_chamado}
     return render(request, 'chamado_interacao/chamado_interacao_form.html', context)
 
+#### READ #####
+
+@login_required(login_url='cliente_login')
+def cliente_list(request, template_name='cliente/cliente_list.html'):
+    cliente = Cliente.objects.all()
+    clientes = {'cliente': cliente}
+    return render(request, template_name, clientes)
+
+@login_required(login_url='atendente_login')
+def atendente_list(request, template_name='atendente/atendente_list.html'):
+    atendente = Atendente.objects.all()
+    atendentes = {'cliente': atendente}
+    return render(request, template_name, atendentes)
+
+@login_required(login_url='cliente_login')
+@login_required(login_url='atendente_login')
 def chamado_interacao_list(request, chamado):
     chamado_interacao = Chamado_Interacao.objects.filter(fk_chamado=chamado)
     context = {'interacao': chamado_interacao, 'chamado': chamado }
     return render(request, 'chamado_interacao/chamado_interacao_list.html', context)
+
+@login_required(login_url='cliente_login')
+def chamado_list(request):
+    cli = Cliente.objects.get(user_id=request.user.id)
+    chamado = Chamado.objects.filter(fk_cliente=cli.id)
+    context = {'chamado': chamado}
+    return render(request, 'chamado/chamado_list.html', context)
+
+#### UPDATE #####
+
+#def atendente_update(request, pk, template_name='atendente/atendente_form.html'):
+#   atendente = (Atendente, pk=pk)
+#    if request.method == "POST":
+#        form = AtendenteForm(request.POST, instance=atendente)
+#        if form.is_valid():
+#            cliente = form.save()
+#            return redirect('atendente_list')
+#    else:
+#        form = AtendenteForm(instance=atendente)
+#    return render(request, template_name, {'form': form})
+
+#### DELETE #####
+
+@login_required(login_url='atendente_login')
+def cliente_delete(request, pk):
+    cliente = Cliente.objects.get(pk=pk)
+    if request.method == "POST":
+        cliente.delete()
+        return redirect('cliente_list')
+    return render(request, 'cliente/cliente_delete.html', {'cliente': cliente})
+
+@login_required(login_url='atendente_login')
+def atendente_delete(request, pk):
+    atendente = Atendente.objects.get(pk=pk)
+    if request.method == "POST":
+        atendente.delete()
+        return redirect('atendente_list')
+    return render(request, 'atendente_delete', {'atendente': atendente})
+
+
+
+
+
+
+
+
+
+
+
+
+
 

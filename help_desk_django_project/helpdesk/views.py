@@ -1,13 +1,13 @@
+import datetime
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.forms import inlineformset_factory
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 
-from .models import *
 from .forms import *
 
 # Create your views here.
@@ -147,20 +147,34 @@ def chamado_create(request, pk):
 @login_required(login_url='atendente_login')
 @login_required(login_url='cliente_login')
 def chamado_interacao_create(request, id_chamado):
+
+    if request.user.is_authenticated:
+        if Atendente.objects.filter(user_id=request.user.id).exists():
+            profile = 'atendente'
+        elif Cliente.objects.filter(user_id=request.user.id).exists():
+            profile = 'cliente'
+    else:
+        profile = ''
+
     form = ChamadoInteracaoForm(request.POST)
     chamado = Chamado.objects.get(id=id_chamado)
     form.instance.fk_chamado = chamado
     form.instance.fk_user = request.user
 
-    if request.method == 'POST':
+    if request.method == 'POST' and 'btn_continue' in request.POST:
         if form.is_valid():
             form.save()
             messages.success(request, 'Interação adicionada!')
             return redirect('chamado_interacao_list', id_chamado)
-        else:
-            messages.error(request, 'Houve um problema ao tentar adicionar a interação ao chamado.')
+    elif request.method == 'POST' and 'btn_finished' in request.POST:
+        if form.is_valid():
+            form.save()
+            chamado.status = 'F'
+            chamado.data_fechamento = datetime.datetime.now()
+            chamado.save()
+            messages.success(request, 'Chamado finalizado!')
             return redirect('chamado_interacao_list', id_chamado)
-    context = {'form': form, 'chamado': id_chamado}
+    context = {'form': form, 'chamado': id_chamado, 'profile': profile}
     return render(request, 'chamado_interacao/chamado_interacao_form.html', context)
 
 #### READ #####

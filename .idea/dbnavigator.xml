@@ -26,13 +26,13 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="20ea6f11-8295-4e61-9333-3c405918424a">
-        <schema name="main" object-types="table, view, column" />
+        <schema name="main" object-types="table, view" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="20ea6f11-8295-4e61-9333-3c405918424a">
-      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select * from helpdesk_chamado_interacao]]></console>
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select * from helpdesk_chamado]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

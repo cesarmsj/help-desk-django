@@ -9,7 +9,7 @@
 </div>
 <div class="row">
     <div class="col-12">
-        <form method="post" action="">
+        <form method="post">
             {% csrf_token %}
                 <div class="input-group mb-3">
                     <div class="input-group-append col-12">
@@ -17,9 +17,17 @@
                         {{ form.interacao }}
                      </div>
                 </div>
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" name="btn_continue">
                 Salvar
             </button>
+            {% if profile == 'atendente' %}
+                <a href="{%
+                    url 'chamado_interacao_create' id_chamado=chamado %}">
+                    <button type="submit" class="btn btn-primary" name="btn_finished">
+                        Finalizar chamado com esta última interação
+                    </button>
+                </a>
+            {% endif %}
         </form>
     </div>
 </div>

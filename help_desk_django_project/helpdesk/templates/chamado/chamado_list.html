@@ -16,6 +16,9 @@
 </div>
 <div class="row">
     <div class="col-12">
+         {% if form.errors %}
+        <p>{{ form.errors }}</p>
+        {% endif %}
         <table class="table">
             <thead>
                 <tr>
@@ -36,10 +39,10 @@
                     <td>{{ c.descricao }}</td>
                     <td>{{ c.get_status_display }}</td>
                     <td>
-                        {% if not c.atendente %}
+                        {% if not c.fk_atendente %}
                         Não atendido
                         {% else %}
-                        {{ c.atendente }}
+                        {{ c.fk_atendente.user.username }}
                         {% endif %}
                     </td>
                     <td>
@@ -71,7 +74,15 @@
     </div>
     {% if filter == 'atendente_logged' %}
         <a href="{% url 'chamado_list' filter='status_a' %}">
-            Ver chamados abertos
+            <button type="submit" class="btn btn-primary">
+                Ver chamados abertos
+            </button>
+        </a>
+    {% elif filter == 'status_a' %}
+        <a href="{% url 'chamado_list' filter='atendente_logged' %}">
+            <button type="submit" class="btn btn-primary">
+                Ver chamados que já estou atendendo.
+            </button>
         </a>
     {% else %}
         <a href="{% url 'chamado_create' request.user.id %}">

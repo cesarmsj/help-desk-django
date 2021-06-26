@@ -73,6 +73,8 @@ def home(request):
             profile = 'atendente'
         elif Cliente.objects.filter(user_id=request.user.id).exists():
             profile = 'cliente'
+    else:
+        profile = ''
     context = { 'profile': profile }
     return render(request, 'home/home.html', context )
 
@@ -90,7 +92,8 @@ def cliente_create(request):
     if request.user.is_authenticated:
         return redirect('cliente_home')
     else:
-        form = CreateUserForm(request.POST)
+        form = CreateUserForm(request.POST or None)
+
         cliente_form = ClienteForm(request.POST)
 
         if form.is_valid() and cliente_form.is_valid():
@@ -99,17 +102,17 @@ def cliente_create(request):
             cliente.user = user
             cliente.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, 'Conta criada para o atendente ' + username)
+            messages.success(request, 'Conta criada para o cliente ' + username)
             return redirect('atendente_login')
 
-    context = {'form': form}
-    return render(request, 'cliente/cliente_form.html', context)
+        context = {'form': form}
+        return render(request, 'cliente/cliente_form.html', context)
 
 def atendente_create(request):
     if request.user.is_authenticated:
         return redirect('atendente_home')
     else:
-        form = CreateUserForm(request.POST)
+        form = CreateUserForm(request.POST or None)
         atendente_form = AtendenteForm(request.POST)
 
         if form.is_valid() and atendente_form.is_valid():
@@ -134,10 +137,10 @@ def chamado_create(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, 'Chamado aberto!')
-            return redirect('chamado_list')
+            return redirect('chamado_list', filter='cliente_logged')
         else:
             messages.error(request, 'Houve um problema ao tentar abrir o chamado.')
-            return redirect('chamado_list')
+            return redirect('chamado_list', filter='cliente_logged')
     context = {'form': form}
     return render(request, 'chamado/chamado_form.html', context)
 
@@ -214,19 +217,14 @@ def chamado_update(request, pk):
 
     chamado = Chamado.objects.get(id=pk)
 
-    form = ChamadoForm(instance=chamado)
     atendente = Atendente.objects.get(user_id=request.user.id)
-    form.instance.fk_atendente = atendente
-    form.instance.status = 'E'
-    if form.is_valid():
-        form.save()
-        messages.success(request, 'Chamado atendido!')
-        url = reverse('chamado_list', kwargs={'filter':'atendente_logged'})
-        return HttpResponseRedirect(url)
-    else:
-        messages.error(request, 'Houve um erro ao tentar atender o chamado.')
-        url = reverse('chamado_list', kwargs={'filter':'atendente_logged'})
-        return HttpResponseRedirect(url)
+
+    chamado.fk_atendente_id = atendente
+    chamado.status = 'E'
+    chamado.save()
+    messages.success(request, 'Chamado atendido!')
+    url = reverse('chamado_list', kwargs={'filter':'atendente_logged'})
+    return HttpResponseRedirect(url)
 
 #### DELETE #####
 

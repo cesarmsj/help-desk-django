@@ -103,7 +103,7 @@ def cliente_create(request):
             cliente.save()
             username = form.cleaned_data.get('username')
             messages.success(request, 'Conta criada para o cliente ' + username)
-            return redirect('atendente_login')
+            return redirect('cliente_login')
 
         context = {'form': form}
         return render(request, 'cliente/cliente_form.html', context)
@@ -150,6 +150,7 @@ def chamado_interacao_create(request, id_chamado):
     form = ChamadoInteracaoForm(request.POST)
     chamado = Chamado.objects.get(id=id_chamado)
     form.instance.fk_chamado = chamado
+    form.instance.fk_user = request.user
 
     if request.method == 'POST':
         if form.is_valid():
@@ -179,8 +180,15 @@ def atendente_list(request, template_name='atendente/atendente_list.html'):
 @login_required(login_url='cliente_login')
 @login_required(login_url='atendente_login')
 def chamado_interacao_list(request, chamado):
+    if request.user.is_authenticated:
+        if Atendente.objects.filter(user_id=request.user.id).exists():
+            profile = 'atendente'
+        elif Cliente.objects.filter(user_id=request.user.id).exists():
+            profile = 'cliente'
+    else:
+        profile = ''
     chamado_interacao = Chamado_Interacao.objects.filter(fk_chamado=chamado)
-    context = {'interacao': chamado_interacao, 'chamado': chamado }
+    context = {'interacao': chamado_interacao, 'chamado': chamado, 'profile': profile }
     return render(request, 'chamado_interacao/chamado_interacao_list.html', context)
 
 @login_required(login_url='cliente_login')

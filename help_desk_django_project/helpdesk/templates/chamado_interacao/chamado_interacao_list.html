@@ -5,7 +5,11 @@
     <div class="col-12">
        <h1>
            Interações do Chamado nº
-           <a href="{% url 'chamado_list' filter='cliente_logged' %}">{{ chamado }}</a>
+           {% if profile == 'cliente' %}
+            <a href="{% url 'chamado_list' filter='cliente_logged' %}">{{ chamado }}</a>
+           {% elif profile == 'atendente' %}
+           <a href="{% url 'chamado_list' filter='atendente_logged' %}">{{ chamado }}</a>
+           {% endif %}
        </h1>
      </div>
 </div>
@@ -16,6 +20,7 @@
                 <tr>
                     <th>Data da Interação</th>
                     <th>Interação</th>
+                    <th>Quem interagiu</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +28,7 @@
                 <tr>
                     <td>{{ i.data_interacao }}</td>
                     <td>{{ i.interacao }}</td>
+                    <td>{{ i.fk_user }}</td>
                 </tr>
             {% endfor %}
             </tbody>

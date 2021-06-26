@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f0ad06ff-9190-46f6-8bb5-5934aeaf9612" name="Default Changelist" comment="Tenho que corrigir um problema ao tentar atender o chamado. Salvando alguns ajustes.">
+    <list default="true" id="f0ad06ff-9190-46f6-8bb5-5934aeaf9612" name="Default Changelist" comment="Recurso de atender chamado OK.">
       <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado/chamado_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado/chamado_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado_interacao/chamado_interacao_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/chamado_interacao/chamado_interacao_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/templates/cliente/cliente_home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/help_desk_django_project/helpdesk/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/help_desk_django_project/helpdesk/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -268,7 +265,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624662984680</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Recurso de atender chamado OK.">
+      <created>1624671583650</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1624671583650</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -302,17 +306,7 @@
     <MESSAGE value="Commit antes de fazer merge com branch dev" />
     <MESSAGE value="Na área do atendente é possível ir para três páginas distintas agora:&#10;1- Meus atendimentos - filtra chamados que o atendente pegou&#10;2- Chamados em aberto - filtra pelos chamados em aberto&#10;3- Todos os chamados - apresenta todos os chamados" />
     <MESSAGE value="Tenho que corrigir um problema ao tentar atender o chamado. Salvando alguns ajustes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Tenho que corrigir um problema ao tentar atender o chamado. Salvando alguns ajustes." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/help_desk_django_project/helpdesk/views.py</url>
-          <line>39</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Recurso de atender chamado OK." />
+    <option name="LAST_COMMIT_MESSAGE" value="Recurso de atender chamado OK." />
   </component>
 </project>

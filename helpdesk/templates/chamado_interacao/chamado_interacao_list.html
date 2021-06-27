@@ -1,0 +1,58 @@
+{% extends '../base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+       <h1>
+           Interações do Chamado nº
+           {% if profile == 'cliente' %}
+            <a href="{% url 'chamado_list' filter='cliente_logged' %}">{{ chamado }}</a>
+           {% elif profile == 'atendente' %}
+           <a href="{% url 'chamado_list' filter='atendente_logged' %}">{{ chamado }}</a>
+           {% endif %}
+       </h1>
+     </div>
+</div>
+<div class="row mt-4">
+    <div class="col-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Data da Interação</th>
+                    <th>Interação</th>
+                    <th>Quem interagiu</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for i in interacao %}
+                <tr>
+                    <td>{{ i.data_interacao }}</td>
+                    <td>{{ i.interacao }}</td>
+                    <td>{{ i.fk_user }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{% url 'chamado_interacao_create' id_chamado=chamado %}">
+            <button type="submit" class="btn btn-primary">
+                Adicionar Interação
+            </button>
+        </a>
+
+    </div>
+</div>
+
+{% if messages %}
+<div class="row mt-3">
+    <div class="col-3">
+    {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}danger{% else %}{{ message.tags }}{% endif %}{% endif %}" role="alert">
+            {{ message }}
+         </div>
+    {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% endblock content %}

@@ -1,0 +1,32 @@
+{% extends '../base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+       <h1>Seja bem-vindo {{ request.user.username  }}</h1>
+     </div>
+</div>
+<div class="row mt-4">
+    <div class="col-12">
+        <ul class="list-group">
+            <li class="list-group-item text-center">
+                <a href="{% url 'chamado_list' filter='atendente_logged' %}" class="text-decoration-none">
+                        Meus atendimentos
+                </a>
+            </li>
+            <li class="list-group-item text-center" class="text-decoration-none">
+                <a href="{% url 'chamado_list' filter='status_a' %}">
+                        Chamados em aberto
+                </a>
+            </li>
+            <li class="list-group-item text-center" class="text-decoration-none">
+                <a href="{% url 'chamado_list' filter='all' %}">
+                       Todos os chamados
+                </a>
+            </li>
+        </ul>
+
+
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,49 @@
+{% extends '../base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+       <h1>Área do Cliente</h1>
+     </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        {% if form.errors %}
+        <p>Usuário ou senha incorreto. Por favor, tente novamente.</p>
+        {% endif %}
+
+        <form method="post" action="" >
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                </div>
+
+                <input type="text" name="username" placeholder="Username" class="form-control">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                </div>
+
+                <input type="password" name="password" placeholder="Password" class="form-control">
+            </div>
+              <p>Não tem uma conta?<a href="{% url 'cliente_create' %}"> Crie uma</a></p>
+              <button type="submit" class="btn btn-success">Login</button>
+        </form>
+    </div>
+</div>
+
+{% if messages %}
+<div class="row mt-3">
+    <div class="col-3">
+    {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}danger{% else %}{{ message.tags }}{% endif %}{% endif %}" role="alert">
+            {{ message }}
+         </div>
+    {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endblock content %}

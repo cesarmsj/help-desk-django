@@ -1,0 +1,107 @@
+{% extends '../base.html' %}
+
+{% block content %}
+<div class="row mb-3">
+    <div class="col-12">
+       {% if filter == 'atendente_logged' %}
+            <h1>Chamados que {{ username }} está atendendo</h1>
+        {% elif filter == 'status_a' %}
+            <h1>Chamados abertos</h1>
+        {% elif filter == 'cliente_logged' %}
+            <h1>Chamados do cliente {{ username }}</h1>
+        {% else %}
+            <h1>Todos os chamados</h1>
+        {% endif %}
+     </div>
+</div>
+<div class="row">
+    <div class="col-12">
+         {% if form.errors %}
+        <p>{{ form.errors }}</p>
+        {% endif %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nº do chamado</th>
+                    <th>Data da abertura</th>
+                    <th>Descrição</th>
+                    <th>Status atual</th>
+                    <th>Atendente</th>
+                    <th>Data de fechamento</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for c in chamado %}
+                <tr>
+                    <td>{{ c.id }}</td>
+                    <td>{{ c.data_abertura }}</td>
+                    <td>{{ c.descricao }}</td>
+                    <td>{{ c.get_status_display }}</td>
+                    <td>
+                        {% if not c.fk_atendente %}
+                        Não atendido
+                        {% else %}
+                        {{ c.fk_atendente.user.username }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not c.data_fechamento %}
+                        Ainda em aberto
+                        {% else %}
+                        {{ c.data_fechamento }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if filter == 'status_a' %}
+                        <a href="{% url 'chamado_update' pk=c.id %}">
+                            <i class="fas fa-hands-helping"></i>
+                        </a>
+                         {% endif %}
+                        {% if filter == 'atendente_logged' %}
+                        <a href="{% url 'chamado_update' pk=c.id %}">
+                            <i class="far fa-check-square"></i>
+                        </a>
+                         {% endif %}
+                        <a href="{% url 'chamado_interacao_list' chamado=c.id %}">
+                            <i class="fas fa-info ml-2"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% if filter == 'atendente_logged' %}
+        <a href="{% url 'chamado_list' filter='status_a' %}">
+            <button type="submit" class="btn btn-primary">
+                Ver chamados abertos
+            </button>
+        </a>
+    {% elif filter == 'status_a' %}
+        <a href="{% url 'chamado_list' filter='atendente_logged' %}">
+            <button type="submit" class="btn btn-primary">
+                Ver chamados que já estou atendendo.
+            </button>
+        </a>
+    {% else %}
+        <a href="{% url 'chamado_create' request.user.id %}">
+            <button type="submit" class="btn btn-primary">
+                Abrir novo chamado
+            </button>
+        </a>
+    {% endif %}
+</div>
+{% if messages %}
+<div class="row mt-3">
+    <div class="col-3">
+    {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}danger{% else %}{{ message.tags }}{% endif %}{% endif %}" role="alert">
+            {{ message }}
+         </div>
+    {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends '../base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-6">
+        <div id="home_art"></div>
+    </div>
+    <div class="col-6">
+        <div class="row">
+                <div id="home_text">Suporte 24/7</div>
+        </div>
+         <div class="row">
+                  {% if profile == 'cliente' %}
+                <a class="nav-link" href="{% url 'cliente_home' %}">Acessar minha página</a>
+                 {% elif profile == 'atendente' %}
+                <a class="nav-link" href="{% url 'atendente_home' %}">Acessar minha página</a>
+                  {% else %}
+                 <p>Faz parte da nossa equipe? <a href="{% url 'atendente_login' %}">Ir para o portal do atendente</a></p>
+                  {% endif %}
+                {% if messages %}
+                <div class="row mt-3">
+                    <div class="col-3">
+                    {% for message in messages %}
+                        <div class="alert {% if message.tags %}alert-{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}danger{% else %}{{ message.tags }}{% endif %}{% endif %}" role="alert">
+                            {{ message }}
+                         </div>
+                    {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+         </div>
+
+    </div>
+
+</div>
+
+{% endblock content %}

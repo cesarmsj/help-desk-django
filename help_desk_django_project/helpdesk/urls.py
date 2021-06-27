@@ -3,6 +3,7 @@ from django.urls import path, re_path
 from .views import *
 
 urlpatterns = [
+    path('', lambda req: redirect('/home')),
     path('home/', home, name='home'),
     path('user_logout/', user_logout, name='user_logout'),
     path('atendente_login/', atendente_login, name='atendente_login'),
